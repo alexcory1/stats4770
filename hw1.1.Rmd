@@ -1,0 +1,34 @@
+```{r}
+OpeningSurveyData <- read.csv("~/rstudio/stats4770/OpeningSurveyData.csv")
+library(forcats)
+library(ggplot2)
+```
+
+```{r}
+eye.table <- fct_count(OpeningSurveyData$EyeColor, prop = T)
+eye.table
+```
+```{r}
+ggplot(OpeningSurveyData, aes(x = IdealHairColor))+
+geom_bar(fill = "blue", colour = "black")+
+labs(x = "Ideal Hair Color",
+y = "Number of Students",
+title = "Ideal Hair Color of STAT 101 Students")+
+theme_bw()+
+theme(axis.title.y = element_text(size = rel(1.4)),
+axis.title.x = element_text(size = rel(1.4)))
+```
+```{r}
+ggplot(OpeningSurveyData, aes(x = HairLength))+
+geom_bar(fill = "blue", colour = "black")+
+labs(x = "Hair Length",
+y = "Number of Students",
+title = "Hair Length of STAT 101 Students")+
+theme_bw()+
+theme(axis.title.y = element_text(size = rel(1.4)),
+axis.title.x = element_text(size = rel(1.4)))
+```
+```{r}
+living.table <- fct_count(OpeningSurveyData$Living, prop = T)
+living.table
+```
