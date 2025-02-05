@@ -1,0 +1,93 @@
+# Question 1: Cocker Spaniels
+
+```
+Cocker spaniels (a breed of dog) are susceptible to anemia. Suppose that 30% of the population of seven year old cocker spaniels have anemia. 
+
+Assume the number of cocker spaniels with anemia in a sample of n=40 dogs from this population has a binomial distribution. 
+```
+
+```{r}
+library(ggplot2)
+```
+
+```{r}
+  plot.binom<- function(n, p){
+    y<- c(0:n)
+    proby<- dbinom(0:n, n, p)
+    Bars<- as.data.frame(cbind(y, proby))
+  
+    ggplot(Bars, aes(x = y, y = proby))+ 
+      geom_bar(stat="identity", width = 1, 
+                fill = "blue", colour = "black")+
+      theme_bw()+
+      theme(axis.title.y = element_text(size = rel(1.4)),
+            axis.title.x = element_text(size = rel(1.4)),
+            axis.text.x = element_text(size = rel(1.2)),
+            axis.text.y = element_text(size = rel(1.2)),
+            plot.title = element_text(hjust=0.5, size = rel(1.6)))+
+      labs(x = "Number of Successes (y)",
+           y = "Probability",
+           title = "Distribution of Binomial R.V.")
+    }
+```
+
+```{r}
+p_y17_dogs <- dbinom(17,40,.3)
+p_y17_dogs
+
+p_y14_dogs <- dbinom(14,40,.3)
+p_y14_dogs
+
+p_y_less_9_dogs <- pbinom(9,40,.3)
+p_y_less_9_dogs
+
+mean_binom_dogs <- 40*.3
+mean_binom_dogs
+
+var_binom_dogs <- 40*.3*.7
+var_binom_dogs
+
+std_dev_dogs <- sqrt(var_binom_dogs)
+std_dev_dogs
+
+plot.binom(40, .3)
+```
+
+
+# Question 2: Genetic Mutation
+
+```
+A certain genetic mutation occurs in a population with probability 0.05. 
+
+ 
+
+Assume the number of people with this genetic mutation in a sample of n=50 unrelated members of this population has a binomial distribution.
+```
+
+```{r}
+p_y2_gene <- dbinom(2, size = 50, prob = 0.05)
+p_y2_gene
+
+p_y_greater_4_gene <- 1 - pbinom(3, size = 50, prob = 0.05)
+p_y_greater_4_gene
+
+p_y_less_4_gene <- pbinom(4, size = 50, prob = 0.05)
+p_y_less_4_gene
+plot.binom(50,.05)
+```
+
+
+
+# Question 3: Colored Marbles
+
+```{r}
+prob_marble <- c(0.5, 5/16, 3/16)
+
+q1_draws <- c(1,2,1)
+q1_prob <- dmultinom(q1_draws,4,prob_marble)
+round(q1_prob,4)
+
+q2_draws <- c(2, 2, 0)
+q2_prob <- dmultinom(q2_draws, 4, prob_marble)
+round(q2_prob, 4)
+```
